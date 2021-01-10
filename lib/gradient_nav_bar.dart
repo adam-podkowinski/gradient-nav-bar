@@ -17,8 +17,6 @@ library gradient_nav_bar;
 import 'package:gradient_nav_bar/model/tab_info.dart';
 import 'package:flutter/material.dart';
 
-const double containerHeight = 70;
-const double itemContainerHeight = 66;
 const double topZero = 0;
 const double dashBarHeight = 3;
 
@@ -35,9 +33,13 @@ class GradientNavigationBar extends StatefulWidget {
   final bool showLabel;
   final double selectedFontSize;
   final double unselectedFontSize;
+  final double containerHeight;
+  final double itemContainerHeight;
 
   const GradientNavigationBar(
       {Key key,
+      this.containerHeight = 70,
+      this.itemContainerHeight = 66,
       this.gradient,
       this.labelColor = Colors.grey,
       this.iconColor = Colors.grey,
@@ -50,7 +52,8 @@ class GradientNavigationBar extends StatefulWidget {
       this.showLabel = false,
       this.selectedFontSize = 14.0,
       this.unselectedFontSize = 12.0})
-      : assert(items != null && items.length > 1, 'Atleast 2 Tab items are required.'),
+      : assert(items != null && items.length > 1,
+            'Atleast 2 Tab items are required.'),
         super(key: key);
 
   @override
@@ -155,8 +158,7 @@ class GradientNavigationBarState extends State<GradientNavigationBar>
                 ? reverseFontAnimation.value
                 : widget.unselectedFontSize,
         onTap: () {
-          if (widget.onTap != null) 
-          {
+          if (widget.onTap != null) {
             widget.onTap(i);
             previousIndex = currentIndex;
             currentIndex = i;
@@ -171,9 +173,9 @@ class GradientNavigationBarState extends State<GradientNavigationBar>
       alignment: Alignment.center,
       children: <Widget>[
         Container(
-          height: containerHeight,
+          height: widget.containerHeight,
           decoration: BoxDecoration(
-            color: widget.backgroundColor!=null
+            color: widget.backgroundColor != null
                 ? widget.backgroundColor
                 : Theme.of(context).backgroundColor,
             boxShadow: [
@@ -202,7 +204,7 @@ class GradientNavigationBarState extends State<GradientNavigationBar>
           duration: duration,
           left: currentPosition,
           child: Container(
-            height: itemContainerHeight,
+            height: widget.itemContainerHeight,
             width: width,
             decoration: BoxDecoration(
               gradient: widget.gradient != null
@@ -213,7 +215,7 @@ class GradientNavigationBarState extends State<GradientNavigationBar>
           ),
         ),
         Container(
-          height: itemContainerHeight,
+          height: widget.itemContainerHeight,
           child: Row(
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -265,7 +267,7 @@ class _TabItem extends StatelessWidget {
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.only(top: 2, bottom: 10),
-                  child: showLabel
+                  child: showLabel && selected
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
