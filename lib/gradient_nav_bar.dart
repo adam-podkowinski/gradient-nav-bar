@@ -39,7 +39,7 @@ class GradientNavigationBar extends StatefulWidget {
   const GradientNavigationBar(
       {Key key,
       this.containerHeight = 70,
-      this.itemContainerHeight = 66,
+      this.itemContainerHeight = 70,
       this.gradient,
       this.labelColor = Colors.grey,
       this.iconColor = Colors.grey,
@@ -266,7 +266,7 @@ class _TabItem extends StatelessWidget {
               alignment: Alignment.center,
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(top: 2, bottom: 10),
+                  padding: EdgeInsets.only(top: 2, bottom: 2),
                   child: showLabel && selected
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
