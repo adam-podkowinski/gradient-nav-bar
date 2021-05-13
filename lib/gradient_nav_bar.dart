@@ -21,15 +21,15 @@ const double topZero = 0;
 const double dashBarHeight = 3;
 
 class GradientNavigationBar extends StatefulWidget {
-  final Gradient gradient;
+  final Gradient? gradient;
   final Color labelColor;
   final Color iconColor;
   final Color selectedLabelColor;
   final Color selectedIconColor;
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final List<TabInfo> items;
   final int currentIndex;
-  final ValueChanged<int> onTap;
+  final ValueChanged<int>? onTap;
   final bool showLabel;
   final double selectedFontSize;
   final double unselectedFontSize;
@@ -37,7 +37,7 @@ class GradientNavigationBar extends StatefulWidget {
   final double itemContainerHeight;
 
   const GradientNavigationBar(
-      {Key key,
+      {Key? key,
       this.containerHeight = 70,
       this.itemContainerHeight = 70,
       this.gradient,
@@ -46,7 +46,7 @@ class GradientNavigationBar extends StatefulWidget {
       this.selectedLabelColor = Colors.white,
       this.selectedIconColor = Colors.white,
       this.backgroundColor,
-      @required this.items,
+      required this.items,
       this.currentIndex = 0,
       this.onTap,
       this.showLabel = false,
@@ -63,17 +63,17 @@ class GradientNavigationBar extends StatefulWidget {
 class GradientNavigationBarState extends State<GradientNavigationBar>
     with TickerProviderStateMixin {
   Duration duration = Duration(milliseconds: 100);
-  double width;
-  double currentPosition;
-  int previousIndex;
-  int currentIndex;
-  Animation<Color> forwardIconAnimation;
-  Animation<Color> reverseIconAnimation;
-  Animation<Color> forwardLabelAnimation;
-  Animation<Color> reverseLabelAnimation;
-  Animation<double> forwardFontAnimation;
-  Animation<double> reverseFontAnimation;
-  AnimationController controller;
+  double? width;
+  double? currentPosition;
+  int? previousIndex;
+  int? currentIndex;
+  late Animation<Color?> forwardIconAnimation;
+  late Animation<Color?> reverseIconAnimation;
+  late Animation<Color?> forwardLabelAnimation;
+  late Animation<Color?> reverseLabelAnimation;
+  late Animation<double> forwardFontAnimation;
+  late Animation<double> reverseFontAnimation;
+  late AnimationController controller;
 
   @override
   void initState() {
@@ -133,7 +133,7 @@ class GradientNavigationBarState extends State<GradientNavigationBar>
     List<_TabItem> tabItems = List();
 
     width = MediaQuery.of(context).size.width / widget.items.length;
-    currentPosition = widget.currentIndex * width;
+    currentPosition = widget.currentIndex * width!;
     for (var i = 0; i < widget.items.length; i++) {
       tabItems.add(_TabItem(
         labelColor: i == widget.currentIndex
@@ -159,7 +159,7 @@ class GradientNavigationBarState extends State<GradientNavigationBar>
                 : widget.unselectedFontSize,
         onTap: () {
           if (widget.onTap != null) {
-            widget.onTap(i);
+            widget.onTap!(i);
             previousIndex = currentIndex;
             currentIndex = i;
             _changePosition();
@@ -193,7 +193,7 @@ class GradientNavigationBarState extends State<GradientNavigationBar>
             child: Container(
               decoration: BoxDecoration(
                 color: widget.gradient != null
-                    ? widget.gradient.colors[0]
+                    ? widget.gradient!.colors[0]
                     : widget.selectedIconColor,
               ),
             ),
@@ -229,18 +229,18 @@ class GradientNavigationBarState extends State<GradientNavigationBar>
 
 class _TabItem extends StatelessWidget {
   final bool selected;
-  final IconData icon;
-  final Gradient gradient;
-  final Color labelColor;
-  final Color iconColor;
-  final String label;
-  final VoidCallback onTap;
-  final Duration duration;
+  final IconData? icon;
+  final Gradient? gradient;
+  final Color? labelColor;
+  final Color? iconColor;
+  final String? label;
+  final VoidCallback? onTap;
+  final Duration? duration;
   final bool showLabel;
-  final double fontSize;
+  final double? fontSize;
 
   const _TabItem(
-      {Key key,
+      {Key? key,
       this.selected = false,
       this.icon,
       this.gradient,
@@ -276,7 +276,7 @@ class _TabItem extends StatelessWidget {
                               color: iconColor,
                             ),
                             Text(
-                              label,
+                              label!,
                               style: TextStyle(
                                   color: labelColor, fontSize: fontSize),
                               overflow: TextOverflow.ellipsis,

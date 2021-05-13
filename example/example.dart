@@ -19,10 +19,10 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, this.title}) : super(key: key);
 
 
-  final String title;
+  final String? title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
     var backgroundColor = Color(0xFF6002EE); // Color.fromRGBO(72, 31, 216, 1);
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.title!),
       ),
       // Add the gradient navigation bar here
       bottomNavigationBar: GradientNavigationBar(
