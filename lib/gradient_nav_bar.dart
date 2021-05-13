@@ -130,7 +130,7 @@ class GradientNavigationBarState extends State<GradientNavigationBar>
 
   @override
   Widget build(BuildContext context) {
-    List<_TabItem> tabItems = List();
+    List<_TabItem> tabItems = [];
 
     width = MediaQuery.of(context).size.width / widget.items.length;
     currentPosition = widget.currentIndex * width!;
